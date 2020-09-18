@@ -2,9 +2,12 @@ package models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity(name = User.PERSISTANCE_NAME)
 @Table(name = User.PERSISTANCE_NAME )
+@NamedQuery(name = "users.findByUsername", query = "from USER_TABLE where login = :username")
+@NamedQuery(name = "users.findByToken", query = "from USER_TABLE where accessToken = :accessToken")
 public class User {
     static final String PERSISTANCE_NAME = "USER_TABLE";
     @Id
@@ -49,16 +52,21 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    public String getAccess_token() {
-        return access_token;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setAccess_token(String access_token) {
-        this.access_token = access_token;
+    public void setAccessToken(String access_token) {
+        this.accessToken = access_token;
+    }
+
+    public String generateAccessToken(){
+        this.setAccessToken(UUID.randomUUID().toString());
+        return this.getAccessToken();
     }
 
     @Column(name = "access_token")
-    private String access_token;
+    private String accessToken;
 
     @OneToMany(mappedBy="owner")
     private List<Entry> myEntries;

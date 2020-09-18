@@ -7,11 +7,16 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <jta-data-source>java:jboss/lab4ds</jta-data-source>
+
+        <class>models.User</class>
+        <class>models.Entry</class>
+
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.current_session_context_class" value="jta"/>
             <property name="show_sql" value="true"/>
-            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgresPlusDialect"/>
+            <property name="hibernate.show_sql" value="true" />
         </properties>
     </persistence-unit>
 </persistence>

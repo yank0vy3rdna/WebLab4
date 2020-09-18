@@ -3,3 +3,5 @@
 .idea
 lab4.iml
 lib
+front/node
+front/node_modules
