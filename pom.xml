@@ -50,11 +50,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.0</version>
-            </plugin>
-            <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>1.7.6</version>
@@ -69,23 +64,42 @@
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
-                        <phase>package</phase>
+                        <phase>validate</phase>
                     </execution>
+<!--                    <execution>-->
+<!--                        <id>npm install</id>-->
+<!--                        <goals>-->
+<!--                            <goal>npm</goal>-->
+<!--                        </goals>-->
+
+<!--                        <phase>generate-resources</phase>-->
+
+<!--                        <configuration>-->
+<!--                            <arguments>install</arguments>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
                     <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>package</phase>
-                    </execution>
-                    <execution>
-                        <id>npm run build</id>
+                        <id>npm run move-dir</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>run build</arguments>
+                            <arguments>run move-dir</arguments>
                         </configuration>
+                        <phase>test</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>package to war</id>
+                        <goals>
+                            <goal>exploded</goal>
+                        </goals>
                         <phase>package</phase>
                     </execution>
                 </executions>

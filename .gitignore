@@ -5,3 +5,5 @@ lab4.iml
 lib
 front/node
 front/node_modules
+src/main/webapp/build
+front/build

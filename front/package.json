@@ -4,17 +4,23 @@
   "private": true,
   "homepage": "build",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
+    "bootstrap": "^4.5.2",
+    "node-sass": "^4.14.1",
+    "primeicons": "^4.0.0",
+    "primereact": "^5.0.0-rc.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "reactstrap": "^8.6.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf ../src/main/webapp/build && mv build ../src/main/webapp/",
-    "test": "react-scripts test",
+    "build-css": "node-sass src/primeflex/src/overrides.scss node_modules/primeflex/primeflex.scss -o src/",
+    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "react-scripts build",
+    "move-dir": "rm -rf ../src/main/webapp/build && cp -r build ../src/main/webapp/",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -31,5 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.10.4"
   }
 }
