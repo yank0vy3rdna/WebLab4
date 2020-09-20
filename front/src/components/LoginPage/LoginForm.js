@@ -79,7 +79,6 @@ function LoginForm() {
     }
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    console.log(MessagesInstance)
     return (
         <div className="p-align-center p-fluid">
             <form>
