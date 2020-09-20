@@ -20,6 +20,10 @@ public class LoginServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        resp.getWriter().write(auth.login(username, password));
+        String result = auth.login(username, password);
+        if (result.equals("No such user found") || result.equals("Not authorized")){
+            resp.setStatus(403);
+        }
+        resp.getWriter().write(result);
     }
 }

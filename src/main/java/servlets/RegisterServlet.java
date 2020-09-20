@@ -20,6 +20,10 @@ public class RegisterServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        resp.getWriter().write(auth.register(username, password));
+        String result = auth.register(username, password);
+        if(result.equals("User already exists") || result.equals("Error")){
+            resp.setStatus(403);
+        }
+        resp.getWriter().write(result);
     }
 }

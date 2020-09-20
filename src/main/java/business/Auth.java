@@ -5,6 +5,9 @@ import models.User;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 @Stateless
 public class Auth {
@@ -30,13 +33,24 @@ public class Auth {
         }
         boolean result = userDAO.checkPassword(user, password);
         if (result) {
-            return user.generateAccessToken();
+            user.generateAccessToken();
+            userDAO.saveUser(user);
+            return Base64.getEncoder().encodeToString((login + (char) (31) + user.getAccessToken()).getBytes(StandardCharsets.UTF_8));
         }
         return "Not authorized";
     }
 
-    public boolean checkAuth(String accessToken) {
-        User user = userDAO.findUserByAccessToken(accessToken);
-        return user != null;
+    public boolean checkAuth(String base64) {
+        try {
+            String token = new String(Base64.getDecoder().decode(base64), StandardCharsets.UTF_8);
+            String[] split = token.split(String.valueOf((char) (31)));
+            String username = split[0];
+            String accessToken = split[1];
+            User user = userDAO.findUser(username);
+            return user.getAccessToken().equals(accessToken);
+        }
+        catch (Throwable e){
+            return false;
+        }
     }
 }

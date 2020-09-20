@@ -4,7 +4,7 @@ function HomePage() {
 
     return (
         <div className="HomePage">
-
+            You're logged in
         </div>
     );
 }

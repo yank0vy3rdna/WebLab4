@@ -60,9 +60,8 @@ public class User {
         this.accessToken = access_token;
     }
 
-    public String generateAccessToken(){
+    public void generateAccessToken(){
         this.setAccessToken(UUID.randomUUID().toString());
-        return this.getAccessToken();
     }
 
     @Column(name = "access_token")

@@ -24,11 +24,6 @@ public class UserDAO {
                 .setParameter("username", username).getResultStream()
                 .findAny().orElse(null);
     }
-    public User findUserByAccessToken(@NotNull String accessToken) {
-        return entityManager.createNamedQuery("users.findByAccessToken", User.class)
-                .setParameter("accessToken", accessToken).getResultStream()
-                .findAny().orElse(null);
-    }
 
     public User createUser(@NotNull @Size(min = 2) @NotBlank String username, @NotNull @NotBlank String password) {
         final String hash = Hash.SHA(password);
@@ -49,6 +44,17 @@ public class UserDAO {
     public boolean removeUser(@NotNull User user) {
         try {
             entityManager.remove(entityManager.getReference(User.class, user.getId()));
+            entityManager.flush();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+    public boolean saveUser(@NotNull User user) {
+        try {
+            entityManager.merge(user);
             entityManager.flush();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
