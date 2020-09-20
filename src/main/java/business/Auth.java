@@ -39,7 +39,12 @@ public class Auth {
         }
         return "Not authorized";
     }
-
+    public User getUserByToken(String base64){
+        String token = new String(Base64.getDecoder().decode(base64), StandardCharsets.UTF_8);
+        String[] split = token.split(String.valueOf((char) (31)));
+        String username = split[0];
+        return userDAO.findUser(username);
+    }
     public boolean checkAuth(String base64) {
         try {
             String token = new String(Base64.getDecoder().decode(base64), StandardCharsets.UTF_8);
@@ -47,6 +52,17 @@ public class Auth {
             String username = split[0];
             String accessToken = split[1];
             User user = userDAO.findUser(username);
+            return user.getAccessToken().equals(accessToken);
+        }
+        catch (Throwable e){
+            return false;
+        }
+    }
+    public boolean checkAuth(User user, String base64) {
+        try {
+            String token = new String(Base64.getDecoder().decode(base64), StandardCharsets.UTF_8);
+            String[] split = token.split(String.valueOf((char) (31)));
+            String accessToken = split[1];
             return user.getAccessToken().equals(accessToken);
         }
         catch (Throwable e){

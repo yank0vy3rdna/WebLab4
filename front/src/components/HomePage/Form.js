@@ -24,6 +24,7 @@ function Form() {
         {label: "2", value: "2"},
     ]
     const onSubmit = () => {
+        // fetch("/check")
     }
     return <div>
         <div className="p-align-center p-fluid">

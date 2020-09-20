@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity(name = Entry.PERSISTANCE_NAME)
 @Table(name = Entry.PERSISTANCE_NAME )
+@NamedQuery(name = "entries.findByOwner", query = "from ENTRY where owner = :owner order by timestamp")
 public class Entry {
     static final String PERSISTANCE_NAME = "ENTRY";
     @Id
@@ -75,6 +76,14 @@ public class Entry {
 
     public Double getY() {
         return Y;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setY(Double y) {
