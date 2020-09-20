@@ -62,21 +62,32 @@ export class LoginForm extends React.Component {
 
     render() {
         return (
-            <div className="p-align-center">
-                <h3>Sign In</h3>
-                <form ref="form" onSubmit={this.onSubmit} className="form">
-                    <div className="p-field">
-                        <label htmlFor="username" className="p-6">Username</label>
-                        <InputText id="username" value={this.state.username}
-                                   onChange={(e) => this.setState({username: e.target.value})}/>
+            <div className="p-align-center p-fluid">
+                <form ref="form" onSubmit={this.onSubmit}>
+                    <h3 style={{"text-align": "right"}}>Sign In</h3>
+                    <div className="p-field p-grid p-jc-end">
+                        <label htmlFor="username" className="p-sm-2 p-md-4 p-xl-6">Username</label>
+                        <div className="p-sm-12 p-md-7 p-xl-5">
+                            <InputText id="username" value={this.state.username}
+                                       onChange={(e) => this.setState({username: e.target.value})}/>
+                        </div>
                     </div>
-                    <div className="p-field">
-                        <label htmlFor="password" className="p-6">Password</label>
-                        <Password id="password" value={this.state.password}
-                                  onChange={(e) => this.setState({password: e.target.value})}/>
+                    <div className="p-field p-grid p-jc-end">
+                        <label htmlFor="password" className="p-sm-2 p-md-4 p-xl-6">Password</label>
+                        <div className="p-sm-12 p-md-7 p-xl-5">
+                            <Password id="password" value={this.state.password}
+                                      onChange={(e) => this.setState({password: e.target.value})}/>
+                        </div>
                     </div>
-                    <div className="p-field">
-                        <Button type="submit" className="p-button-primary" label="Sign in" icon="pi pi-sign-in"/>
+                    <div className="p-field p-grid p-jc-end">
+
+                        <div className="p-sm-12 p-md-6 p-xl-3">
+                        <Button type="button" className="p-button-primary" label="Sign in" icon="pi pi-sign-in"/>
+                        </div>
+
+                        <div className="p-sm-12 p-md-6 p-xl-3">
+                        <Button type="button" className="p-button-primary" label="Register" icon="pi pi-sign-in"/>
+                        </div>
                     </div>
                 </form>
             </div>
