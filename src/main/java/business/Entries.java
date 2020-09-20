@@ -8,8 +8,10 @@ import models.User;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.StringJoiner;
 
 @Stateless
 public class Entries {
@@ -40,9 +42,9 @@ public class Entries {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         List<Entry> entries = entryDAO.findEntries(current_user);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
+        StringJoiner joiner = new StringJoiner(",");
         for (Entry entry : entries) {
+            StringBuilder stringBuilder = new StringBuilder();
             Date date = new Date(entry.getTimestamp());
             stringBuilder.append("{\"x\":\"");
             stringBuilder.append(entry.getX().toString());
@@ -50,11 +52,14 @@ public class Entries {
             stringBuilder.append(entry.getY().toString());
             stringBuilder.append("\", \"r\":\"");
             stringBuilder.append(entry.getR().toString());
+            stringBuilder.append("\", \"result\":\"");
+            stringBuilder.append(entry.isResult());
             stringBuilder.append("\", \"timestamp\":\"");
             stringBuilder.append(formatter.format(date));
-            stringBuilder.append("\"},");
+            stringBuilder.append("\"}");
+            joiner.add(stringBuilder.toString());
         }
-        stringBuilder.append("]");
-        return stringBuilder.toString();
+
+        return "["+joiner.toString()+"]";
     }
 }
