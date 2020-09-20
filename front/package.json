@@ -13,7 +13,8 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "reactstrap": "^8.6.0"
+    "reactstrap": "^8.6.0",
+    "redux": "^4.0.5"
   },
   "scripts": {
     "build-css": "node-sass src/primeflex/src/overrides.scss node_modules/primeflex/primeflex.scss -o src/",
