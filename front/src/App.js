@@ -5,7 +5,7 @@ import {
     Route
 } from 'react-router-dom';
 
-import './primeflex/primeflex.scss';
+import './overrides.scss';
 import HomePage from './components/HomePage/HomePage';
 import LoginPage from './components/LoginPage/LoginPage';
 import {Panel} from "primereact/panel";
@@ -23,7 +23,7 @@ function App() {
     return (
         <div className="p-grid p-justify-center">
             <Router>
-                <div className="p-xl-10">
+                <div className="p-sm-12 p-md-8 p-xl-5">
                     <Panel className="" header="Web Lab 4. Developed by Kryukov Andrey, P3214, 2523">
                         <Route path="" component={localStorage.getItem("ACCESS_TOKEN") !== null ? Home : Login}/>
                     </Panel>

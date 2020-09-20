@@ -3,7 +3,7 @@ import LoginForm from './LoginForm';
 
 function LoginPage() {
     return (
-        <div className="p-xl-12">
+        <div>
                 <LoginForm/>
         </div>
     );
