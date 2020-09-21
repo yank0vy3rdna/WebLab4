@@ -103,7 +103,7 @@ function draw(ctx, x, y, r, entries) {
 
         ctx.beginPath();
         ctx.moveTo(ctx.canvas.width / 2, ctx.canvas.height / 2);
-        ctx.arc(ctx.canvas.width / 2, ctx.canvas.height / 2, R, 0, Math.PI / 2, false);
+        ctx.arc(ctx.canvas.width / 2, ctx.canvas.height / 2, R/2, 0, Math.PI / 2, false);
         ctx.closePath();
         ctx.strokeStyle = "rgba(91,95,201,0.58)";
         ctx.fillStyle = "rgba(91,95,201,0.58)";
@@ -117,10 +117,10 @@ function draw(ctx, x, y, r, entries) {
         // Треугольник
 
         ctx.beginPath()
-        ctx.moveTo(ctx.canvas.width / 2 + R / 2, ctx.canvas.height / 2)
+        ctx.moveTo(ctx.canvas.width / 2 + R, ctx.canvas.height / 2)
         ctx.lineTo(ctx.canvas.width / 2, ctx.canvas.height / 2 - R)
         ctx.lineTo(ctx.canvas.width / 2, ctx.canvas.height / 2)
-        ctx.lineTo(ctx.canvas.width / 2 + R / 2, ctx.canvas.height / 2)
+        ctx.lineTo(ctx.canvas.width / 2 + R, ctx.canvas.height / 2)
         ctx.closePath()
         ctx.fill()
         ctx.stroke()
