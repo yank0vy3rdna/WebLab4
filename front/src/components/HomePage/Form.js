@@ -35,7 +35,7 @@ function Form(props) {
 
                 <Messages ref={(el) => props.MessagesInstance.current = el}/>
                 <div className="p-field p-grid p-jc-end">
-                    <label htmlFor="username" className="p-sm-2 p-md-4 p-xl-6">X</label>
+                    <label htmlFor="username" className="p-sm-3 p-md-4 p-xl-6">X</label>
                     <div className="p-sm-12 p-md-7 p-xl-5">
                         <Dropdown value={props.x_val} options={options} onChange={(e) => {
                             props.setX(e.value)
@@ -43,7 +43,7 @@ function Form(props) {
                     </div>
                 </div>
                 <div className="p-field p-grid p-jc-end">
-                    <label htmlFor="username" className="p-sm-2 p-md-4 p-xl-6">Y(-3 .. 3)</label>
+                    <label htmlFor="username" className="p-sm-3 p-md-4 p-xl-6">Y(-3 .. 3)</label>
                     <div className="p-sm-12 p-md-7 p-xl-5">
                         <InputNumber value={props.y_val} onValueChange={(e) => props.setY(e.value)} mode="decimal"
                                      min={-3} max={3}
@@ -51,7 +51,7 @@ function Form(props) {
                     </div>
                 </div>
                 <div className="p-field p-grid p-jc-end">
-                    <label htmlFor="username" className="p-sm-2 p-md-4 p-xl-6">R</label>
+                    <label htmlFor="username" className="p-sm-3 p-md-4 p-xl-6">R</label>
                     <div className="p-sm-12 p-md-7 p-xl-5">
                         <Dropdown value={props.r_val} options={options} onChange={(e) => {
                             if (!props.validateNumber(e.value, 0.0001, 2)) {
