@@ -14,18 +14,19 @@ function reducer(state, action) {
 const store = createStore(reducer, initialState);
 
 function checkAuth() {
-    console.log(store.getState())
-    fetch("/auth/check" + "?token=" + store.getState().token)
-        .then(response => response.text()
-            .then((text => {
-                        if (text !== 'true') {
-                            store.dispatch({type: "CHANGE_TOKEN", value: {token: null}})
-                            localStorage.clear()
+    if (store.getState().token !== null) {
+        fetch("/auth/check" + "?token=" + store.getState().token)
+            .then(response => response.text()
+                .then((text => {
+                            if (text !== 'true') {
+                                store.dispatch({type: "CHANGE_TOKEN", value: null})
+                                localStorage.clear()
+                            }
                         }
-                    }
+                    )
                 )
             )
-        )
+    }
 }
 
 store.subscribe(checkAuth)
