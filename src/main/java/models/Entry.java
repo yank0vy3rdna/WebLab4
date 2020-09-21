@@ -3,12 +3,12 @@ package models;
 import javax.persistence.*;
 
 @Entity(name = Entry.PERSISTANCE_NAME)
-@Table(name = Entry.PERSISTANCE_NAME )
+@Table(name = Entry.PERSISTANCE_NAME)
 @NamedQuery(name = "entries.findByOwner", query = "from ENTRY where owner = :owner order by timestamp")
 public class Entry {
     static final String PERSISTANCE_NAME = "ENTRY";
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
     @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     private Long id;
     @Column(name = "x")
@@ -24,6 +24,7 @@ public class Entry {
     @ManyToOne
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User owner;
+
     public User getOwner() {
         return owner;
     }
@@ -63,9 +64,9 @@ public class Entry {
         else if ((X < 0) && (Y < 0))
             this.result = false;
         else if ((X > 0) && (Y > 0)) {
-            this.result = Y <= R - 2 * X;
+            this.result = Y <= R - X;
         } else if ((X > 0) && (Y < 0)) {
-            this.result = X * X + Y * Y <= R * R;
+            this.result = X * X + Y * Y <= R * R / 4;
         } else if ((X < 0) && (Y > 0)) {
             this.result = (X >= -R / 2) && (Y <= R);
         }
