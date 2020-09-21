@@ -8,7 +8,8 @@ import javax.persistence.*;
 public class Entry {
     static final String PERSISTANCE_NAME = "ENTRY";
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     private Long id;
     @Column(name = "x")
     private Double X;

@@ -31,7 +31,7 @@ function HomePage() {
     return (
         <div>
             <Logout/>
-            <Plot/>
+            <Plot entries={entries}/>
             <Form setEntries={setEntries}/>
             <Table entries={entries}/>
         </div>

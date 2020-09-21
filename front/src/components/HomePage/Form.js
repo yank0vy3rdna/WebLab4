@@ -9,10 +9,15 @@ import {Dropdown} from "primereact/dropdown";
 
 let MessagesInstance
 
+export let x, y, r
+
 function Form(props) {
     const [x_val, setX] = useState(0);
     const [y_val, setY] = useState(0);
     const [r_val, setR] = useState(0);
+    x = x_val
+    y = y_val
+    r = r_val
     const options = [
         {label: "-2", value: "-2"},
         {label: "-1.5", value: "-1.5"},
