@@ -1,3 +1,5 @@
+import store from "../../storage/store";
+
 function canvas_arrow(context, fromx, fromy, tox, toy) {
     const headlen = 10; // length of head in pixels
     const dx = tox - fromx;
@@ -178,7 +180,7 @@ function drawPoints(ctx, entries, r) {
         ctx.moveTo(ctx.canvas.width / 2 + R * x, ctx.canvas.height / 2 - R * y);
         ctx.arc(ctx.canvas.width / 2 + R * x, ctx.canvas.height / 2 - R * y, ctx.canvas.width / 300, 0, 2 * Math.PI);
         ctx.closePath();
-        if (myRows[i]['Result'] === 'true') {
+        if (myRows[i]['result'] === 'true') {
             ctx.strokeStyle = "rgba(0, 255, 0, " + (1. - alphastep * i) + ")";
             ctx.fillStyle = "rgba(0, 255, 0, " + (1. - alphastep * i) + ")";
         } else {
@@ -190,4 +192,37 @@ function drawPoints(ctx, entries, r) {
     }
 }
 
-export {draw, drawPoint}
+function canvas_click_handler(event, r, setEntries, validateNumber, ctx, MessagesInstance) {
+    try {
+        let r_val = parseFloat(r)
+        if (isNaN(r_val)) {
+            r_val = 1
+        }
+        let kR = r_val / (ctx.canvas.height / 4)
+        const x = event.nativeEvent.offsetX,
+            y = event.nativeEvent.offsetY;
+        const rly_x = (x - ctx.canvas.width / 2) * kR;
+        let rly_y = (ctx.canvas.height / 2 - y) * kR;
+        const x_val = rly_x.toFixed(10).toString()
+        const y_val = rly_y.toFixed(10).toString()
+        r_val = r_val.toFixed(10).toString()
+        if (!validateNumber(x_val, -2, 2) || !validateNumber(y_val, -3, 3) ||!validateNumber(r_val, 0.0001, 3)){
+            if (MessagesInstance.current !== null) {
+                MessagesInstance.current.show({
+                    severity: 'warn',
+                    summary: 'Validation error'
+                })
+            }
+        }
+        else {
+            fetch("/entry?token=" + store.getState().token + "&x=" + x_val + "&y=" + y_val + "&r=" + r_val, {
+                method: 'POST'
+            }).then(response => response.text()
+                .then(text => setEntries(JSON.parse(text).reverse())))
+        }
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export {draw, drawPoint, canvas_click_handler}
