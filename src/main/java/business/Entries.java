@@ -26,7 +26,12 @@ public class Entries {
             return "Unauthorized";
         }
         try {
-            entryDAO.createEntry(Double.valueOf(x), Double.valueOf(y), Double.valueOf(r), current_user);
+            double xd = Double.parseDouble(x);
+            double yd = Double.parseDouble(y);
+            double rd = Double.parseDouble(r);
+            if (xd <= 2 && xd >= -2 && yd <= 3 && yd >= -3 && rd <= 2 && rd > 0) {
+                entryDAO.createEntry(xd, yd, rd, current_user);
+            }
         }catch (NumberFormatException e){
             return "Bad format";
         }
