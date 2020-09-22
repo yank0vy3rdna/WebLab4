@@ -25,7 +25,7 @@ function HomePage() {
                 })
             }
         }
-        return validation_result
+        return !validation_result
     }
     useEffect(() => {
         if (entries === null) {
